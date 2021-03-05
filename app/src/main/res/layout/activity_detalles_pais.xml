@@ -7,6 +7,59 @@
     android:layout_height="match_parent"
     tools:context=".DetallesPais">
 
+    <TextView
+        android:id="@+id/StatusMsg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="StatusMsg:"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:padding="5dp"/>
+    <TextView
+        android:id="@+id/Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Name:"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:padding="5dp"
+        android:layout_below="@id/StatusMsg"/>
+    <TextView
+        android:id="@+id/Capital"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Capital:"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:padding="5dp"
+        android:layout_below="@id/Name"/>
+    <TextView
+        android:id="@+id/GeoRectangle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="GeoRectangle:"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:padding="5dp"
+        android:layout_below="@id/Capital"/>
 
+    <TextView
+        android:id="@+id/TelPref"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TelPref:"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:padding="5dp"
+        android:layout_below="@id/GeoRectangle"/>
+    <TextView
+        android:id="@+id/CountryInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CountryInfo:"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:padding="5dp"
+        android:layout_below="@id/TelPref"/>
 
 </RelativeLayout>
