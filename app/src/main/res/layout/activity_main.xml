@@ -24,7 +24,8 @@
             android:layout_toEndOf="@+id/combobox"
             android:text="Detalles"
             android:textAllCaps="false"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            android:onClick="btnVerDetalles"/>
     </RelativeLayout>
 
     <fragment

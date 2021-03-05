@@ -2,11 +2,13 @@ package software.reconocerpaises;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.text.style.TtsSpan;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -24,18 +26,37 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     GoogleMap mapa;
     PolylineOptions poligonos;
     LatLng[] puntos;
+    String[] iso2;
+    int paisSeleccionado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SupportMapFragment mapFragment = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.mapa);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapa);
         mapFragment.getMapAsync(this);
 
         Spinner combobox = (Spinner)findViewById(R.id.combobox);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.paises, R.layout.activity_main);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.paises, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         combobox.setAdapter(adapter);
+
+        iso2 = new String[]{"EC"};
+
+        this.paisSeleccionado = 0;
+
+        combobox.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                paisSeleccionado = position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                paisSeleccionado = 0;
+            }
+        });
     }
 
     @Override
@@ -44,16 +65,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         this.mapa = googleMap;
 
         this.puntos = new LatLng[]{new LatLng(-1.831239, -78.183406)}; //Ecuador
-        this.mapa.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        this.mapa.getUiSettings().setZoomControlsEnabled(true);
+        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        googleMap.getUiSettings().setZoomControlsEnabled(true);
 
         CameraUpdate camara = CameraUpdateFactory.newLatLngZoom(puntos[0], 6);
-        this.mapa.moveCamera(camara);
+        googleMap.moveCamera(camara);
     }
 
     public void cambiarLugar(int lugar){
         int zoom = 14;
-
         CameraPosition posicionCamara = new CameraPosition.Builder()
                 .target(this.puntos[lugar])
                 .zoom(zoom)
@@ -62,5 +82,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         CameraUpdate camara = CameraUpdateFactory.newCameraPosition(posicionCamara);
         this.mapa.animateCamera(camara);
+    }
+
+    public void btnVerDetalles(View view){
+        Intent cambiarActivity = new Intent(this, DetallesPais.class);
+        cambiarActivity.putExtra("iso2", "EC");
+        startActivity(cambiarActivity);
     }
 }

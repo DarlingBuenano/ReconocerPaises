@@ -5,7 +5,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import software.cardsview.WebService.HttpRequest.HttpRequestException;
+import software.reconocerpaises.WebService.HttpRequest.HttpRequestException;
 
 import org.json.JSONException;
 
